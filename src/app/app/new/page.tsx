@@ -15,24 +15,24 @@ import {
 } from "@/components/ui";
 
 type FormData = {
-  montoInicial: string;
-  fechaInicio: string;
-  plazoMeses: string;
-  tasaAnual: string;
-  frecuencia: "diaria" | "semanal" | "mensual" | "anual";
-  institucion: string;
-  tipo: "vista" | "corto" | "mediano" | "largo";
+  initialAmount: string;
+  startDate: string;
+  term: string;
+  rate: string;
+  paymentFrequency: "diaria" | "semanal" | "mensual" | "anual";
+  institution: string;
+  type: "vista" | "corto" | "mediano" | "largo";
 };
 
 export default function InversionForm() {
   const [formData, setFormData] = useState<FormData>({
-    montoInicial: "",
-    fechaInicio: "",
-    plazoMeses: "",
-    tasaAnual: "",
-    frecuencia: "mensual",
-    institucion: "",
-    tipo: "vista",
+    initialAmount: "",
+    startDate: "",
+    term: "",
+    rate: "",
+    paymentFrequency: "mensual",
+    institution: "",
+    type: "vista",
   });
 
   const handleChange = (field: keyof FormData, value: string) => {
@@ -42,27 +42,27 @@ export default function InversionForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({
-      montoInicial: Number(formData.montoInicial),
-      fechaInicio: new Date(formData.fechaInicio),
-      plazoMeses: Number(formData.plazoMeses),
-      tasaAnual: Number(formData.tasaAnual),
-      frecuencia: formData.frecuencia,
-      institucion: formData.institucion,
-      tipo: formData.tipo,
+      initialAmount: Number(formData.initialAmount),
+      startDate: new Date(formData.startDate),
+      term: Number(formData.term),
+      rate: Number(formData.rate),
+      paymentFrequency: formData.paymentFrequency,
+      institution: formData.institution,
+      type: formData.type,
     });
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 max-w-md mx-auto p-4">
       <div>
-        <Label htmlFor="montoInicial" className="mb-1 block">
+        <Label htmlFor="initialAmount" className="mb-1 block">
           Monto Inicial
         </Label>
         <Input
-          id="montoInicial"
+          id="initialAmount"
           type="number"
-          value={formData.montoInicial}
-          onChange={(e) => handleChange("montoInicial", e.target.value)}
+          value={formData.initialAmount}
+          onChange={(e) => handleChange("initialAmount", e.target.value)}
           placeholder="10000"
           step="0.01"
           min="0"
@@ -71,41 +71,41 @@ export default function InversionForm() {
       </div>
 
       <div>
-        <Label htmlFor="fechaInicio" className="mb-1 block">
+        <Label htmlFor="startDate" className="mb-1 block">
           Fecha de Inicio
         </Label>
         <Input
-          id="fechaInicio"
+          id="startDate"
           type="date"
-          value={formData.fechaInicio}
-          onChange={(e) => handleChange("fechaInicio", e.target.value)}
+          value={formData.startDate}
+          onChange={(e) => handleChange("startDate", e.target.value)}
           required
         />
       </div>
 
       <div>
-        <Label htmlFor="plazoMeses" className="mb-1 block">
+        <Label htmlFor="term" className="mb-1 block">
           Plazo (meses)
         </Label>
         <Input
-          id="plazoMeses"
+          id="term"
           type="number"
-          value={formData.plazoMeses}
-          onChange={(e) => handleChange("plazoMeses", e.target.value)}
+          value={formData.term}
+          onChange={(e) => handleChange("term", e.target.value)}
           min="1"
           required
         />
       </div>
 
       <div>
-        <Label htmlFor="tasaAnual" className="mb-1 block">
+        <Label htmlFor="rate" className="mb-1 block">
           Tasa Anual (ej: 8 para 8%)
         </Label>
         <Input
-          id="tasaAnual"
+          id="rate"
           type="number"
-          value={formData.tasaAnual}
-          onChange={(e) => handleChange("tasaAnual", e.target.value)}
+          value={formData.rate}
+          onChange={(e) => handleChange("rate", e.target.value)}
           step="0.1"
           min="0"
           max="100"
@@ -114,15 +114,15 @@ export default function InversionForm() {
       </div>
 
       <div>
-        <Label htmlFor="frecuencia" className="mb-1 block">
+        <Label htmlFor="paymentFrequency" className="mb-1 block">
           Frecuencia de pago de rendimientos
         </Label>
         <Select
-          value={formData.frecuencia}
-          onValueChange={(value) => handleChange("frecuencia", value)}
+          value={formData.paymentFrequency}
+          onValueChange={(value) => handleChange("paymentFrequency", value)}
         >
-          <SelectTrigger id="frecuencia" className="w-full">
-            <SelectValue placeholder="Selecciona una frecuencia" />
+          <SelectTrigger id="paymentFrequency" className="w-full">
+            <SelectValue placeholder="Selecciona una paymentFrequency" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="diaria">Diaria</SelectItem>
@@ -134,14 +134,14 @@ export default function InversionForm() {
       </div>
 
       <div>
-  <Label htmlFor="institucion" className="mb-1 block">
+  <Label htmlFor="institution" className="mb-1 block">
     Institución
   </Label>
   <Select
-    value={formData.institucion}
-    onValueChange={(value) => handleChange("institucion", value)}
+    value={formData.institution}
+    onValueChange={(value) => handleChange("institution", value)}
   >
-    <SelectTrigger id="institucion" className="w-full">
+    <SelectTrigger id="institution" className="w-full">
       <SelectValue placeholder="Selecciona una institución" />
     </SelectTrigger>
     <SelectContent>
@@ -155,8 +155,8 @@ export default function InversionForm() {
       <div>
         <Label className="mb-2 block">Tipo de inversion</Label>
         <RadioGroup
-          value={formData.tipo}
-          onValueChange={(value) => handleChange("tipo", value)}
+          value={formData.type}
+          onValueChange={(value) => handleChange("type", value)}
           aria-label="Tipo de inversión"
         >
           <div className="flex gap-4 mt-1">
@@ -164,9 +164,9 @@ export default function InversionForm() {
               <label
                 key={val}
                 className="flex items-center space-x-2 cursor-pointer"
-                htmlFor={`tipo-${val}`}
+                htmlFor={`type-${val}`}
               >
-                <RadioGroupItem value={val} id={`tipo-${val}`} />
+                <RadioGroupItem value={val} id={`type-${val}`} />
                 <span>{val.charAt(0).toUpperCase() + val.slice(1)}</span>
               </label>
             ))}

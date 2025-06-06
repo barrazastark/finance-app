@@ -1,5 +1,6 @@
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Investment } from "@/types";
+import  sql from "@/lib/db"
 
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat("es-MX", {
@@ -98,41 +99,21 @@ if (periodsPassed > maxPeriods) periodsPassed = maxPeriods;
   );
 }
 
-// Simula fetch a DB con retraso
 async function fetchInvestments(): Promise<Investment[]> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve([
-        {
-          initialAmount: 100,
-          startDate: new Date("2024-12-30"),
-          termMonths: 12,
-          annualRate: 0.08,
-          frequency: "monthly",
-          institution: "Finsus",
-          type: "vista",
-        },
-        {
-          initialAmount: 100,
-          startDate: new Date("2025-04-30"),
-          termMonths: 6,
-          annualRate: 0.10,
-          frequency: "monthly",
-          institution: "Finsus",
-          type: "corto",
-        },
-        {
-          initialAmount: 100,
-          startDate: new Date("2024-09-01"),
-          termMonths: 12,
-          annualRate: 0.10,
-          frequency: "monthly",
-          institution: "Banco ABC",
-          type: "largo",
-        }
-      ]);
-    }, 2000);
-  });
+  const rows = await sql`
+    SELECT
+      investments.initial_amount AS "initialAmount",
+      investments.start_date AS "startDate",
+      investments.term AS "termMonths",
+      investments.rate AS "annualRate",
+      investments.payment_frequency AS "frequency",
+      institutions.name AS "institution",
+      investments.type
+    FROM investments
+    JOIN institutions ON investments.institution_id = institutions.id;
+  `;
+
+  return rows as Investment[];
 }
 
 
@@ -170,13 +151,13 @@ export default async function Dashboard() {
   const summaryByInstitution = Object.entries(groupedByInstitution).map(
     ([institution, invs]) => {
       const today = new Date();
-      const totalInitial = invs.reduce((a, c) => a + c.initialAmount, 0);
+      const totalInitial = invs.reduce((a, c) => a + Number(c.initialAmount), 0);
       const results = calculateInvestmentResults(invs, today);
       const totalPaid = results.reduce((total, current) => total + current.rendimientoAcumulado , 0);
       const totalPending = results.reduce((total, current) => total + current.rendimientoPorPagar , 0);
       const expectedRev = totalPaid + totalPending;
       const avgRate =
-        invs.reduce((a, c) => a + c.annualRate * c.initialAmount, 0) /
+        invs.reduce((a, c) => a + c.annualRate * Number(c.initialAmount), 0) /
         totalInitial;
       return { institution, totalInitial, totalPaid, totalPending, avgRate, expectedRev };
     }
@@ -184,10 +165,10 @@ export default async function Dashboard() {
 
   
 
-  const totalInvested = investments.reduce((a, c) => a + c.initialAmount, 0);
+  const totalInvested = investments.reduce((a, c) => a + Number(c.initialAmount), 0);
   const globalAvgRate =
     totalInvested > 0
-      ? investments.reduce((a, c) => a + c.annualRate * c.initialAmount, 0) /
+      ? investments.reduce((a, c) => a + c.annualRate * Number(c.initialAmount), 0) /
         totalInvested
       : 0;
   const annualReturnExpected = summaryByInstitution.reduce((total, current) => total + current.expectedRev, 0)

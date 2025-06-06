@@ -3,7 +3,7 @@ export type Investment = {
   startDate: Date;
   termMonths: number;
   annualRate: number;
-  frequency: "daily" | "weekly" | "monthly" | "annual";
+  frequency: string;
   institution: string;
-  type: "vista" | "corto" | "mediano" | "largo";
+  type: string;
 };
