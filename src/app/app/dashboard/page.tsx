@@ -2,6 +2,8 @@ import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import { Investment } from "@/types";
 import  sql from "@/lib/db"
 
+export const revalidate = 10;
+
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat("es-MX", {
     style: "currency",
