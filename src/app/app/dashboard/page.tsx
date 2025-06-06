@@ -17,8 +17,6 @@ interface InvestmentResult {
   rendimientoPorPagar: number;
 }
 
-
-
 function diffInMonths(startDate: Date, endDate: Date): number {
   return (
     (endDate.getFullYear() - startDate.getFullYear()) * 12 +
