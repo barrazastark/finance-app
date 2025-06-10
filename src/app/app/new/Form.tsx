@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useActionState } from "react";
+import { useState } from "react";
 import {
   Button,
   Input,
@@ -18,8 +18,6 @@ import { InvestmentFormData, Institution, saveInvestment } from "./actions"
 type Props = {
   institutions: Institution[];
 }
-
-const initialState = { success: false, error: null, pending: false };
 
 export default function Form({ institutions }: Props) {
   // const [state, formAction] = useActionState(saveInvestment, initialState);

@@ -71,7 +71,7 @@ export async function saveInvestment(formData: FormData) {
       )
     `;
    
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Insert failed:", error);
     throw new Error("Error Inserting");
     
