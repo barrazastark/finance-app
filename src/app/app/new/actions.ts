@@ -26,15 +26,15 @@ export async function fetchIntitutions(): Promise<Institution[]> {
   return rows as Institution[];
 }
 
-export async function saveInvestment(formData: FormData) {
+export async function saveInvestment(formData: InvestmentFormData) {
   try {
-    const initialAmount = formData.get("initialAmount") as string;
-    const startDate = formData.get("startDate") as string;
-    const term = formData.get("term") as string;
-    const rate = formData.get("rate") as string;
-    const paymentFrequency = formData.get("paymentFrequency") as string;
-    const institutionId = formData.get("institutionId") as string;
-    const type = formData.get("type") as string;
+    const initialAmount = formData.initialAmount;
+    const startDate = formData.startDate;
+    const term = formData.term;
+    const rate = formData.rate;
+    const paymentFrequency = formData.paymentFrequency;
+    const institutionId = formData.institutionId
+    const type = formData.type;
 
     // Validate presence if needed
     if (
