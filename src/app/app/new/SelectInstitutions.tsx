@@ -29,7 +29,9 @@ export default function SelectInstitutionsClient({
 
   useEffect(() => {
     fetchInstitutions().then(res => {
-      res.length && onChange(String(res[0].id))
+      if (res.length) {
+        onChange(String(res[0].id))
+      }
       setInstitutions(res);
       setLoading(false);
     });
