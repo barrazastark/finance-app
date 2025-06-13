@@ -1,4 +1,4 @@
-import { fetchIntitutions } from "@/app/app/new/actions"
+import { fetchIntitutions } from "@/app/new/actions"
 import { NextResponse } from "next/server";
 
 export async function GET() {

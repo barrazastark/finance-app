@@ -20,22 +20,22 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">
         {/* Logo */}
         <div className="flex-shrink-0">
-          <Link href="/app/dashboard">
+          <Link href="/dashboard">
             <span className="text-xl font-bold text-gray-900 dark:text-white">Finance APP</span>
           </Link>
         </div>
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-4">
-          <Link href="/app/dashboard" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+          <Link href="/dashboard" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
             Dashboard
           </Link>
-          <Link href="/app/new" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+          <Link href="/new" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
             Nueva Inversión
           </Link>
-          <Link href="/app/investments" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+          <Link href="/investments" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
             Inversiones
           </Link>
-          <Link href="/app/settings" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+          <Link href="/settings" className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
             Configuración
           </Link>
         </div>
@@ -55,16 +55,16 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden px-4 pb-4 bg-white dark:bg-gray-800 shadow absolute top-16 left-0 w-full z-40">
-          <Link href="/app/dashboard" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <Link href="/dashboard" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             Dashboard
           </Link>
-          <Link href="/app/new" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <Link href="/new" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             Nueva Inversión
           </Link>
-          <Link href="/app/investments" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <Link href="/investments" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             Inversiones
           </Link>
-          <Link href="/app/settings" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+          <Link href="/settings" className="block py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             Configuración
           </Link>
         </div>
