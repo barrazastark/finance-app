@@ -43,7 +43,7 @@ export default function NewPage() {
       await saveInvestment(formData);
       setFormData(initialForm);
       toast("Inversion guardada.");
-    } catch (error) {
+    } catch (_) {
       toast("Un error a ocurrido.");
 
     } finally {
