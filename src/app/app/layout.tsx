@@ -1,7 +1,6 @@
 
+import { Toaster } from "sonner";
 import Layout from '../../components/Layout';
-
-
 
 export default function RootLayout({
   children,
@@ -10,7 +9,10 @@ export default function RootLayout({
 }>) {
   return (
   
-        <Layout>{children}</Layout>
+        <Layout>
+          <Toaster position="top-center" />
+          {children}
+        </Layout>
      
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2Icon } from "lucide-react";
+import { toast } from "sonner"
 import {
   Button,
   Input,
@@ -18,18 +19,19 @@ import {
 import { InvestmentFormData, saveInvestment } from "./actions"
 import SelectInstitutions from "./SelectInstitutions";
 
-export default function NewPage() {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const [formData, setFormData] = useState<InvestmentFormData>({
-    initialAmount: "",
+const initialForm: InvestmentFormData = {
+  initialAmount: "",
     startDate: "",
     term: "",
     rate: "",
     paymentFrequency: "monthly",
     institutionId: "",
     type: "vista",
-  });
+}
+
+export default function NewPage() {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<InvestmentFormData>(initialForm);
 
   const handleChange = (field: keyof InvestmentFormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -40,10 +42,11 @@ export default function NewPage() {
     setLoading(true);
     try {
       await saveInvestment(formData);
-      router.push("/app/dashboard");
+      setFormData(initialForm);
+      toast("Inversion guardada.");
     } catch (error) {
-      // Optionally handle error
-      console.error(error);
+      toast("Un error a ocurrido.");
+
     } finally {
       setLoading(false);
     }
@@ -108,7 +111,7 @@ export default function NewPage() {
           type="number"
           value={formData.rate}
           onChange={(e) => handleChange("rate", e.target.value)}
-          step="0.1"
+          step="0.01"
           min="0"
           max="100"
           required
